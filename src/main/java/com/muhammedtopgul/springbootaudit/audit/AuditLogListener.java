@@ -95,7 +95,6 @@ public class AuditLogListener implements PostInsertEventListener, PostUpdateEven
             for (int i = 0; i < propertyNames.length; i++) {
                 System.out.println("********** On Post Delete **********");
                 Map<String, String> changes = new HashMap<>();
-                auditLog = new AuditLog();
                 auditLog.setClassName(entity.getClass().getCanonicalName());
                 auditLog.setPersistedObjectId(postDeleteEvent.getId().toString());
                 auditLog.setEventName(AuditEvent.DELETE.name());
