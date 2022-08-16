@@ -43,8 +43,8 @@ public class AuditLogListener implements PostInsertEventListener, PostUpdateEven
             AuditLog auditLog = new AuditLog();
             Map<String, Map<String, String>> changeLog = new HashMap<>();
             for (int i = 0; i < propertyNames.length; i++) {
-                Map<String, String> changes = new HashMap<>();
                 System.out.println("********** On Post Insert **********");
+                Map<String, String> changes = new HashMap<>();
                 auditLog.setClassName(entity.getClass().getCanonicalName());
                 auditLog.setPersistedObjectId(postInsertEvent.getId().toString());
                 auditLog.setEventName(AuditEvent.INSERT.name());
@@ -68,9 +68,8 @@ public class AuditLogListener implements PostInsertEventListener, PostUpdateEven
             Map<String, Map<String, String>> changeLog = new HashMap<>();
             for (int i = 0; i < currentStates.length; i++) {
                 if (!previousStates[i].equals(currentStates[i])) {
-                    Map<String, String> changes = new HashMap<>();
                     System.out.println("********** On Post Update **********");
-                    auditLog = new AuditLog();
+                    Map<String, String> changes = new HashMap<>();
                     auditLog.setClassName(entity.getClass().getCanonicalName());
                     auditLog.setPersistedObjectId(postUpdateEvent.getId().toString());
                     auditLog.setEventName(AuditEvent.UPDATE.name());
@@ -94,15 +93,15 @@ public class AuditLogListener implements PostInsertEventListener, PostUpdateEven
             AuditLog auditLog = new AuditLog();
             Map<String, Map<String, String>> changeLog = new HashMap<>();
             for (int i = 0; i < propertyNames.length; i++) {
-                Map<String, String> changes = new HashMap<>();
                 System.out.println("********** On Post Delete **********");
+                Map<String, String> changes = new HashMap<>();
                 auditLog = new AuditLog();
                 auditLog.setClassName(entity.getClass().getCanonicalName());
                 auditLog.setPersistedObjectId(postDeleteEvent.getId().toString());
                 auditLog.setEventName(AuditEvent.DELETE.name());
 
                 changes.put("oldValue", getPropertyValue(deletedState[i]));
-                changes.put("newValue", getPropertyValue(null));
+                changes.put("newValue", null);
                 changeLog.put(propertyNames[i], changes);
             }
             auditLog.setChangeLog(changeLog);
