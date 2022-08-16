@@ -20,7 +20,6 @@ import java.util.List;
 public class DepartmentController {
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapper departmentMapper;
-    private final EmployeeMapper employeeMapper;
 
     @GetMapping
     public List<DepartmentDto> findAll() {
@@ -43,7 +42,6 @@ public class DepartmentController {
                 orElseThrow(NullPointerException::new);
         department.setName(departmentDto.getName());
         department.setCapacity(departmentDto.getCapacity());
-        department.setEmployees(employeeMapper.toEntityList(departmentDto.getEmployees()));
         return departmentMapper.toDto(departmentMapper.toEntity(departmentDto));
     }
 }

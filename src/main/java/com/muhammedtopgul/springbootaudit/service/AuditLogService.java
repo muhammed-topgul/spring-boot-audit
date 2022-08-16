@@ -15,6 +15,7 @@ public class AuditLogService {
     private final AuditLogRepository auditLogRepository;
 
     public void save(AuditLog auditLog) {
-        auditLogRepository.save(auditLog);
+        if (auditLog.getClassName() != null && !auditLog.getClassName().trim().equals(""))
+            auditLogRepository.save(auditLog);
     }
 }

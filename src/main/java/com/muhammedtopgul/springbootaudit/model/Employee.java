@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.Size;
 
 /**
  * @author muhammed-topgul
@@ -15,11 +15,13 @@ import java.io.Serializable;
 @Entity
 @Data
 @NoArgsConstructor
+@AuditAware
 @EntityListeners(AuditLogListener.class)
-public class Employee implements Serializable, AuditAware {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min = 2, max = 20)
     private String fullName;
     private String email;
 
